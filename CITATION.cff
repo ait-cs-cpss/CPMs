@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article listed under preferred-citation."
+type: software
+title: "CPMs: Context-Based Proposition Maps for Model Checking Learned Automata"
+abstract: >-
+  Annotates learned Mealy machines (DOT format) with security-relevant
+  propositions using context-based proposition maps (CPMs) and translates
+  them into Rebeca models and property files for model checking.
+authors:
+  - family-names: Marksteiner
+    given-names: Stefan
+    affiliation: "AIT Austrian Institute of Technology"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/ait-cs-cpss/CPMs"
+license: EUPL-1.2
+# version: "1.0.0"
+# date-released: "2026-11-30"
+keywords:
+  - automata learning
+  - model checking
+  - Rebeca
+  - security verification
+  - black-box testing
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Marksteiner
+      given-names: Stefan
+    - family-names: Sjödin
+      given-names: Mikael
+    - family-names: Sirjani
+      given-names: Marjan
+  title: "From automata learning to model checking: Formal security verification of black-box protocols"
+  journal: "Computers & Security"
+  volume: 172
+  start: 105168
+  year: 2027
+  doi: "10.1016/j.cose.2026.105168"

@@ -1,0 +1,68 @@
+reactiveclass ENVIRONMENT(3) {
+	knownrebecs {
+		SYSTEM system;
+	}
+	ENVIRONMENT() { self.start(); }
+	void start() { system.req(); }
+	msgsrv err(){ system.req(); }
+	msgsrv ok(){ system.req(); }
+}
+
+reactiveclass SYSTEM(3) {
+	knownrebecs {
+		ENVIRONMENT environment;
+	}
+	statevars {
+		boolean prot, auth; //Explicit state variables
+		int state; //State tracker variable
+		boolean accessok, SYS_ERROR; //Implicit state properties + error flag
+	}
+	SYSTEM() {
+		prot=true;
+		accessok=false;
+		auth=false;
+		SYS_ERROR=false;
+		state=0;
+	}
+	msgsrv req() {
+		SYS_ERROR=false;
+		accessok=false;
+		int data =?(0,1);
+		switch(data) {
+			case 0: self.read(); break;
+			case 1: self.cred(); break;
+			default: self.err();
+		}
+	}
+	msgsrv err(){
+		SYS_ERROR = true; //If we reach this, something is wrong.
+	}
+	msgsrv read(){
+		if(state==0) {
+			state=0; 
+			environment.err();
+		} else
+		if(state==1) {
+			accessok = true;
+			state=1; 
+			environment.ok();
+		}
+	}
+	msgsrv cred(){
+		if(state==0) {
+			auth = true;
+			state=1; 
+			environment.ok();
+		} else
+		if(state==1) {
+			auth = false;
+			state=0; 
+			environment.err();
+		}
+	}
+}
+
+main {
+	ENVIRONMENT environment(system):();
+	SYSTEM system(environment):();
+}

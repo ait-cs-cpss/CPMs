@@ -1,0 +1,18 @@
+digraph g {
+	S0 [shape="circle" label="S0\n PROT"];
+	S1 [shape="circle" label="S1\n PROT\n AUTH"];
+	T0 [shape="circle" label="τ\n PROT\n ACCESSOK\n AUTH", style=dashed];
+	S1 -> T0 [label="READ / OK" ];
+	T0 -> S1 [label="ε / ε" ];
+	T1 [shape="circle" label="τ\n PROT", style=dashed];
+	S0 -> T1 [label="READ / ERR" ];
+	T1 -> S0 [label="ε / ε" ];
+	T2 [shape="circle" label="τ\n PROT", style=dashed];
+	S0 -> T2 [label="CRED / OK" ];
+	T2 -> S1 [label="ε / ε" ];
+	T3 [shape="circle" label="τ\n PROT\n AUTH", style=dashed];
+	S1 -> T3 [label="CRED / ERR" ];
+	T3 -> S0 [label="ε / ε" ];
+__start0 [label="" shape="none" width="0" height="0"];
+__start0 -> S0;
+}

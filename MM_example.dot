@@ -1,0 +1,10 @@
+digraph g {
+	s0 [shape="circle" label="S0"];
+	s1 [shape="circle" label="S1"];
+	s0 -> s1 [label="CRED / OK"];
+	s0 -> s0 [label="READ / ERR"];
+	s1 -> s0 [label="CRED / ERR"];
+	s1 -> s1 [label="READ / OK"];
+	__start0 [label="",shape=none];
+	__start0 -> s0;
+}
