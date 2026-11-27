@@ -645,8 +645,6 @@ public class MM2Rebeca {
 	}
 	
 	
-	
-	//TODO Write Rebeca Property File
 	void writeRebeca(String filename) {
 		
 		try {
@@ -790,7 +788,44 @@ public class MM2Rebeca {
     	writer.println("\tSYSTEM system(environment):();");
     	writer.println("}");
     	writer.flush();
+    	
+    	//WRITE REBECA property file
+    	try {
+			writer = new PrintWriter(new FileWriter(new File(filename.contains(".property")?filename:filename+".property")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 		
+    	writer.println("property {");
+    	writer.println("\tdefine {");
+		writer.println("\tSYS_ERROR = system.SYS_ERROR;");
+		for(String p:propositions)
+			writer.println("\t"+p.toUpperCase()+" = system."+p+";");
+		for(int i=0;i<states.size();i++)
+			writer.println("\tS"+i+" = (system.state == "+i+");");
+		for(String p:implicitProps)
+			writer.println("\t"+p.toUpperCase()+" = system."+p+";");		
+		writer.println("\t}");
+		writer.println("\tAssertion{");
+		writer.println("\t\tAssertion0: (!SYS_ERROR);");
+		writer.println("\t}");
+		
+		//These the are generic properties from the paper:
+		//authentication, confidentiality, privilege levels, key validity
+		//if propositions are undefined, the respective property should be commented out.
+		//We don't want to set it with a dummy, because this could give the wrong impressions
+		//the property would be satisfied.
+		//TODO: Load properties dynamically
+		writer.println("\tLTL{");
+		writer.println("\t\tP1:G( (!(!AUTH &&PROT)) || !ACCESSOK);");
+		writer.println("\t\tP2:G( (!PROT) || (!UREADOK));");
+		writer.println("\t\tP3:G( (!PRIV || AUTH) && ((!(!PRIV &&CRIT)) || !ACCESSOK));");
+		writer.println("\t\tP4:G(!INVKEYOK);");
+		writer.println("\t}");
+    	writer.println("}");
+    	writer.println();
+		writer.flush();
 	}
 
 }
