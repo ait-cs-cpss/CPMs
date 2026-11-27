@@ -1,0 +1,21 @@
+property {
+	define {
+	SYS_ERROR = system.SYS_ERROR;
+	PROT = system.PROT;
+	ACCESSOK = system.ACCESSOK;
+	AUTH = system.AUTH;
+	S0 = (system.state == 0);
+	S1 = (system.state == 1);
+	ACCESSOK = system.ACCESSOK;
+	}
+	Assertion{
+		Assertion0: (!ERROR);
+	}
+	LTL{
+		P1:G( (!(!AUTH &&PROT)) || !ACCESSOK);
+		P2:G( (!PROT) || (!UREADOK));
+		P3:G( (!PRIV || AUTH) && ((!(!PRIV &&CRIT)) || !ACCESSOK));
+		P4:G(!INVKEYOK);
+	}
+}
+
