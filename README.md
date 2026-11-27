@@ -99,7 +99,7 @@ If you use this software, please cite the article above. GitHub's "Cite this rep
 
 ## License
 
-The source code is licensed under the [Apache License 2.0](LICENSE). See [`NOTICE`](NOTICE) for attribution.
+The source code is licensed under the [EUPL 1.2](LICENSE). See [`NOTICE`](NOTICE) for attribution.
 <!-- TODO: adjust if a different license is chosen -->
 
 The article PDF is not covered by the software license; it is distributed under CC BY 4.0 as stated above.
